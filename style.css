@@ -1,0 +1,532 @@
+/* ==============================================
+   LOLITA CARTA — by Lokito 🦭💕
+   ============================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&family=Space+Mono:wght@400&display=swap');
+
+:root {
+    --rosa: #e8728a;
+    --rosa-claro: #f9c8d4;
+    --rosa-oscuro: #c4556d;
+    --azul-foca: #dce8f0;
+    --gris: #4a5568;
+    --gris-claro: #8a99ad;
+    --crema: #fdf8f5;
+    --sombra: rgba(0,0,0,0.08);
+}
+
+/* RESET */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Crimson Pro', Georgia, serif;
+    background-color: var(--crema);
+    background-image: url('fotos/focas-bg.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Overlay blanco suave encima del fondo de focas */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: rgba(253, 248, 245, 0.82);
+    backdrop-filter: blur(1px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Líneas de papel encima */
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: 
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 27px,
+            rgba(180, 200, 220, 0.1) 27px,
+            rgba(180, 200, 220, 0.1) 28px
+        );
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ==============================================
+   INTRO OVERLAY
+   ============================================== */
+.intro-overlay {
+    position: fixed;
+    inset: 0;
+    background-image: url('fotos/focas-bg.png');
+    background-size: cover;
+    background-position: center;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 1.2s ease, transform 1.2s ease;
+    overflow: hidden;
+}
+
+.intro-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(253, 248, 245, 0.78);
+    backdrop-filter: blur(2px);
+    z-index: 0;
+}
+
+.intro-content {
+    text-align: center;
+    z-index: 2;
+    position: relative;
+    z-index: 10;
+}
+
+.seal-intro {
+    animation: sealBounce 2s ease-in-out infinite;
+}
+
+.seal-svg-intro {
+    width: 130px;
+    height: 130px;
+    filter: drop-shadow(0 8px 20px rgba(232, 114, 138, 0.25));
+}
+
+.intro-from {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--gris-claro);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.intro-from span {
+    color: var(--rosa);
+    font-weight: 700;
+}
+
+.intro-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3.5rem;
+    color: var(--rosa-oscuro);
+    line-height: 1.1;
+    margin-bottom: 12px;
+    text-shadow: 2px 2px 0px rgba(232, 114, 138, 0.15);
+}
+
+.intro-sub {
+    font-size: 1rem;
+    color: var(--gris-claro);
+    margin-bottom: 28px;
+    font-style: italic;
+}
+
+.btn-open {
+    padding: 14px 40px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    color: white;
+    background: linear-gradient(135deg, var(--rosa) 0%, var(--rosa-oscuro) 100%);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 12px 30px rgba(196, 85, 109, 0.35), 0 0 0 4px rgba(232, 114, 138, 0.15);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.btn-open:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 18px 40px rgba(196, 85, 109, 0.45), 0 0 0 6px rgba(232, 114, 138, 0.2);
+}
+
+.btn-open:active { transform: translateY(0); }
+
+/* Focas flotantes en intro */
+.intro-seal-float {
+    position: absolute;
+    font-size: 2rem;
+    animation: floatAround 4s ease-in-out infinite;
+    pointer-events: none;
+    opacity: 0.7;
+    z-index: 5;
+}
+.s1 { top: 10%; left: 8%; animation-delay: 0s; font-size: 2.5rem; }
+.s2 { top: 15%; right: 10%; animation-delay: 1s; font-size: 1.8rem; }
+.s3 { bottom: 20%; left: 12%; animation-delay: 0.5s; }
+.s4 { bottom: 15%; right: 8%; animation-delay: 1.5s; font-size: 1.5rem; }
+.s5 { top: 50%; left: 5%; animation-delay: 2s; font-size: 1.6rem; }
+
+.fade-out {
+    opacity: 0 !important;
+    transform: scale(1.08) !important;
+    pointer-events: none;
+}
+
+/* ==============================================
+   STICKER LAYER (decoración flotante)
+   ============================================== */
+.sticker-layer {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 5;
+    overflow: hidden;
+}
+
+.sticker {
+    position: absolute;
+    animation: floatSticker 6s ease-in-out infinite;
+    opacity: 0.85;
+}
+
+.sticker svg { display: block; }
+
+/* Posiciones de stickers alrededor de la carta */
+.st1  { width: 90px;  top: 5%;   left: 1%;   animation-delay: 0s;    animation-duration: 7s; }
+.st2  { width: 100px; top: 30%;  right: 0%;  animation-delay: 1.5s;  animation-duration: 8s; transform: rotate(10deg); }
+.st3  { width: 70px;  top: 60%;  left: 0%;   animation-delay: 3s;    animation-duration: 6s; transform: rotate(-8deg); }
+.st4  { font-size: 1.4rem; top: 12%;  left: 12%;  animation-delay: 0.5s; }
+.st5  { font-size: 1.2rem; top: 25%;  left: 3%;   animation-delay: 2s; }
+.st6  { font-size: 1.2rem; top: 8%;   right: 12%; animation-delay: 1s; }
+.st7  { font-size: 1.5rem; top: 45%;  right: 3%;  animation-delay: 2.5s; }
+.st8  { font-size: 1.3rem; bottom: 30%; left: 5%;  animation-delay: 1.2s; }
+.st9  { width: 85px;  bottom: 5%;  right: 1%;  animation-delay: 2s;    animation-duration: 9s; transform: rotate(5deg); }
+.st10 { font-size: 2rem; bottom: 15%; left: 2%;  animation-delay: 0.8s; }
+.st11 { font-size: 1.4rem; top: 75%;  right: 4%;  animation-delay: 3.5s; }
+
+/* ==============================================
+   MÚSICA
+   ============================================== */
+.music-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid var(--rosa-claro);
+    box-shadow: 0 8px 20px var(--sombra);
+    cursor: pointer;
+    z-index: 100;
+    font-size: 1.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.music-btn:hover { transform: scale(1.1); }
+.music-btn.playing { animation: spinSlow 4s linear infinite; }
+.hidden { display: none !important; }
+
+/* ==============================================
+   CARTA PRINCIPAL
+   ============================================== */
+.carta {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 60px 24px 80px;
+    position: relative;
+    z-index: 10;
+    transition: opacity 1.5s ease, transform 1.5s ease;
+}
+
+.hidden-card {
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+/* HEADER */
+.carta-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.header-seal {
+    font-size: 3rem;
+    animation: sealBounce 2.5s ease-in-out infinite;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.carta-from {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gris-claro);
+    margin-bottom: 6px;
+}
+
+.carta-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 5rem;
+    color: var(--rosa-oscuro);
+    line-height: 1;
+    margin-bottom: 10px;
+    text-shadow: 3px 3px 0 rgba(196, 85, 109, 0.12);
+}
+
+.carta-fecha {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--gris-claro);
+    letter-spacing: 2px;
+}
+
+.carta-divider {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin: 24px 0;
+    font-size: 1.1rem;
+    color: var(--rosa-claro);
+}
+
+/* BLOQUES ZIGZAG */
+.carta-bloque {
+    display: flex;
+    align-items: flex-start;
+    gap: 32px;
+    margin-bottom: 60px;
+}
+
+.bloque-derecha { flex-direction: row; }
+.bloque-izquierda { flex-direction: row-reverse; }
+
+/* TEXTO */
+.carta-texto {
+    flex: 1;
+    padding: 8px 0;
+}
+
+.carta-texto p {
+    font-size: 1.15rem;
+    line-height: 1.9;
+    color: var(--gris);
+    font-weight: 300;
+    margin-bottom: 16px;
+}
+
+.carta-texto p em {
+    font-style: italic;
+    color: var(--rosa-oscuro);
+    font-weight: 400;
+}
+
+/* POLAROIDS */
+.polaroid {
+    flex-shrink: 0;
+    width: 200px;
+    background: white;
+    padding: 10px 10px 36px 10px;
+    box-shadow: 
+        0 4px 6px rgba(0,0,0,0.07),
+        0 10px 30px rgba(0,0,0,0.08),
+        inset 0 0 0 1px rgba(0,0,0,0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: default;
+    position: relative;
+}
+
+.polaroid:hover {
+    transform: rotate(0deg) scale(1.05) !important;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15) !important;
+    z-index: 20;
+}
+
+.polaroid-img {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    background: #f0f0f0;
+}
+
+.polaroid-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+}
+
+.polaroid-caption {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1rem;
+    color: var(--gris);
+    text-align: center;
+    margin-top: 10px;
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+}
+
+/* Rotaciones naturales */
+.rotate-right  { transform: rotate(3deg); }
+.rotate-left   { transform: rotate(-4deg); }
+.rotate-right-2 { transform: rotate(-2deg); }
+.rotate-left-2  { transform: rotate(5deg); }
+.rotate-center  { transform: rotate(-1.5deg); }
+
+/* Chincheta decorativa */
+.polaroid::before {
+    content: '📌';
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.2rem;
+    z-index: 2;
+}
+
+/* SELLO CENTRAL */
+.sello-central {
+    text-align: center;
+    margin: 10px 0 50px;
+}
+
+.sello-ring {
+    font-size: 3.5rem;
+    display: inline-block;
+    background: white;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    line-height: 90px;
+    border: 3px dashed var(--rosa-claro);
+    box-shadow: 0 6px 20px rgba(232, 114, 138, 0.15);
+    animation: sealBounce 3s ease-in-out infinite;
+}
+
+.sello-text {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    color: var(--gris-claro);
+    margin-top: 12px;
+    text-transform: uppercase;
+}
+
+/* FOTO ESPECIAL GRANDE */
+.foto-especial {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0 60px;
+}
+
+.polaroid-grande {
+    width: 260px;
+}
+
+.polaroid-grande .polaroid-img {
+    height: 280px;
+}
+
+/* FOOTER / FIRMA */
+.carta-footer {
+    text-align: center;
+    padding: 40px 0 20px;
+    border-top: 1px dashed var(--rosa-claro);
+}
+
+.firma-desde {
+    font-size: 1rem;
+    color: var(--gris-claro);
+    font-style: italic;
+    margin-bottom: 4px;
+}
+
+.firma-nombre {
+    font-family: 'Dancing Script', cursive;
+    font-size: 4rem;
+    color: var(--rosa-oscuro);
+    line-height: 1.1;
+    text-shadow: 2px 2px 0 rgba(196, 85, 109, 0.1);
+}
+
+.firma-extra {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    color: var(--gris-claro);
+    margin-top: 16px;
+    text-transform: uppercase;
+}
+
+/* REVEAL ON SCROLL */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==============================================
+   KEYFRAMES
+   ============================================== */
+@keyframes sealBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes floatAround {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    33% { transform: translateY(-12px) rotate(3deg); }
+    66% { transform: translateY(-6px) rotate(-2deg); }
+}
+
+@keyframes floatSticker {
+    0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); }
+    50% { transform: translateY(-10px) rotate(var(--r, 0deg)); }
+}
+
+@keyframes spinSlow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* ==============================================
+   RESPONSIVE
+   ============================================== */
+@media (max-width: 600px) {
+    .carta { padding: 40px 16px 60px; }
+    
+    .carta-title { font-size: 3.5rem; }
+    
+    .carta-bloque {
+        flex-direction: column !important;
+        align-items: center;
+        gap: 24px;
+    }
+
+    .polaroid { width: 180px; }
+    .polaroid-img { height: 170px; }
+    .polaroid-grande { width: 220px; }
+    .polaroid-grande .polaroid-img { height: 240px; }
+
+    .st1, .st2, .st3, .st9 { display: none; }
+    .st4, .st5, .st6, .st7, .st8, .st10, .st11 { font-size: 1rem; }
+
+    .intro-title { font-size: 2.8rem; }
+    .firma-nombre { font-size: 3rem; }
+}
